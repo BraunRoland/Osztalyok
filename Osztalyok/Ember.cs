@@ -67,7 +67,6 @@ namespace Osztalyok
         {
             List<string> jatekok = ["labdázott", "karmolászott", "harapdált", "romlott kaját evett", "egeret kergetett"];
             List<string> eztCsinalta = [];
-            string jatek;
             if (rendetlensegSzint == 0)
             {
                 Alvas();
@@ -77,8 +76,32 @@ namespace Osztalyok
                 Console.WriteLine("Rendetlenségszint: Elfogadható");
                 eztCsinalta.Append(jatekok[rnd.Next(0, jatekok.Count)]);
             }
-            
-            
+            else if (rendetlensegSzint < 61)
+            {
+                Console.WriteLine("Rendetlenségszint: átlagos");
+                for (int i = 0; i < 2; i++)
+                {
+                    eztCsinalta.Append(jatekok[rnd.Next(0, jatekok.Count)]);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Rendetlenségszint: Veszélyes!");
+                for ( int i = 0; i < 3; ++i )
+                {
+                    eztCsinalta.Append(jatekok[rnd.Next(0, jatekok.Count)]);
+                }
+            }
+            Console.Write("A cica: ");
+            foreach (var item in eztCsinalta)
+            {
+                Console.Write(item + ", ");
+                if (item == "romlott kaját evett")
+                {
+                    Alvas();
+                }
+            }
+            Console.WriteLine();
         }
     }
 }
