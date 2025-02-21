@@ -126,6 +126,10 @@ namespace Osztalyok
             {
                 maxRend = 35;
             }
+            if (faj == "narancs")
+            {
+                maxRend += 35;
+            }
             Rendetlenseg();
         }
 
