@@ -17,8 +17,9 @@ namespace Osztalyok
         private int fogyasztas;
         private bool ehes;
         private string nem;
+        private int maxRend;
 
-        public Cicaaa(string nev, int kor, int suly, string faj, string szin, int rendetlensegSzint, int fogyasztas, bool ehes, string nem)
+        public Cicaaa(string nev, int kor, int suly, string faj, string szin, int rendetlensegSzint, int fogyasztas, string nem)
         {
             this.nev = nev;
             this.kor = kor;
@@ -29,6 +30,7 @@ namespace Osztalyok
             this.fogyasztas = fogyasztas;
             this.nem = nem;
             ehes = true;
+            maxRend = 100;
         }
         Random rnd = new Random();
 
@@ -43,6 +45,7 @@ namespace Osztalyok
                 szin = "zold";
                 suly -= (int)(suly * (esely / 100.0));
                 rendetlensegSzint *=(int) 0.5;
+                Eletkor();
             }
             suly += (int)Math.Ceiling(fogyasztas * kajaSuly);
             
@@ -60,6 +63,7 @@ namespace Osztalyok
         public void Ebredes()
         {
             rendetlensegSzint = 100;
+            Eletkor();
             ehes = true;
         }
 
@@ -98,10 +102,39 @@ namespace Osztalyok
                 Console.Write(item + ", ");
                 if (item == "romlott kaját evett")
                 {
-                    Alvas();
+                    Eves(rnd.Next(5));
                 }
             }
             Console.WriteLine();
+        }
+
+        public void Eletkor()
+        {
+            if (kor < 3)
+            {
+                maxRend = 100;
+            }
+            else if (kor < 6)
+            {
+                maxRend = 75;
+            }
+            else if (kor < 9)
+            {
+                maxRend = 50;
+            }
+            else
+            {
+                maxRend = 35;
+            }
+            Rendetlenseg();
+        }
+
+        public void Rendetlenseg()
+        {
+            if ( rendetlensegSzint > maxRend)
+            {
+                rendetlensegSzint = maxRend;
+            }
         }
     }
 }
